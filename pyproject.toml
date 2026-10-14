@@ -1,0 +1,42 @@
+[build-system]
+requires = ["hatchling==1.32.4"]
+build-backend = "hatchling.build"
+
+[project]
+name = "minecraft-dev-lab"
+version = "0.1.0.dev0"
+description = "Minecraft Mod・Plugin開発用の並行サーバー環境管理"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = []
+
+[project.optional-dependencies]
+gui = ["PySide6==6.12.0"]
+dev = ["build==1.6.1", "ruff==0.17.0"]
+
+[project.urls]
+Repository = "https://github.com/rs0325/minecraft-dev-lab"
+Issues = "https://github.com/rs0325/minecraft-dev-lab/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/minecraft_dev_lab"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/src",
+    "/scripts/check_distribution.py",
+    "/docs",
+    "/README.md",
+    "/AGENTS.md",
+    "/pyproject.toml",
+    "/.github",
+    "/.gitattributes",
+    "/.gitignore",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]

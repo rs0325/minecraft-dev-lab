@@ -1,0 +1,24 @@
+# 開発規約
+
+- 回答・コメント・文書・commitは日本語。ユーザーの明示指示と対象に近い規約を優先する。
+- Python 3.12、srcレイアウト、SQLite、GUIはPySide6/Qt Widgets。基本機能からGUI依存を分離する。
+- 設計はdocs/design.md、完成条件・依存はGitHub Issueとdocs/roadmap.mdに従う。
+- SushiEricWorkspace固有repo・API・ポート・Gradle/Maven・旧保存形式を必須にしない。
+- 任意repoと実行dataを分離し、primary・他owner・未コミット変更・worldを保全する。
+- 作業前とbranch作成前にfetchして起点を確認する。通常はorigin/develop起点、feature/issue-<番号>の専用worktreeで作業する。
+- source worktreeは<workspace>/worktrees/<task-id>/<repo>/。既存の専用管理スクリプトがなければgit worktreeを使う。同時書込ownerは一人。
+- commit/push/PR/merge/rebase/reset/branch削除/releaseは許可された操作だけを実行する。mainはリリース用、developは開発基準。
+- commit/push/PRは原則別モデルのgit_operatorへ一括委譲する。作業担当がgpt-6-lunaならgit_operator_altを使用する。
+- 作業モデルはgpt-6-luna（low/medium）かgpt-6.1-solのみ。専用役割の固定設定を上書きしない。
+- ownerは協調契約。OS ACL・sandboxの代替にしない。
+- ポート無効化・実socket停止・予約解除を区別し、所有process/childの終了不明時は予約を保持する。
+- 同一ユーザーの別管理rootもホスト共通予約を使い、外部processとのbind raceは起動後に検出する。
+- 除外は削除要求ではない。基準世代を直接書き換えず、候補検証後に新世代を明示確定する。
+- worldの自動チャンクマージ、稼働中data取り込み、秘密の通常出力を追加しない。
+- 過剰な抽象化・防御処理・fallback・無意味なtest・未使用拡張・無関係な変更を含めない。
+- 機能変更は必要な実装・呼出し元・test・文書を同じIssueで扱う。公開APIの前提・副作用・例外を記載する。
+- ビルド確認はdocs/build.mdのruff/build/check_distribution。追加機能の必須試験はIssueに従う。
+- OS別native/実Minecraft/GUI/保存往復を区別し、未実行を成功としない。共有契約・並行処理・保存変更では重点反証する。
+- Issue/PRの優先度を理由付きで記載し、存在しないラベルを無許可作成しない。
+- commit/PR題名はtype: 日本語の概要。commit本文は具体的な変更の箇条書き。
+- 完了・未着手・検証・残課題と、公開したcommit/branch/PRを報告する。公開だけでIssueをcloseしない。
